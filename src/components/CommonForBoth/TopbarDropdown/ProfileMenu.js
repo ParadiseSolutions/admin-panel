@@ -20,11 +20,15 @@ const ProfileMenu = props => {
   // Declare a new state variable, which we'll call "menu"
   const [menu, setMenu] = useState(false)
 
-  const [username, setusername] = useState("Admin")
+  const [username, setusername] = useState("carlitos")
 
   useEffect(() => {
+
+
+    console.log('logeon antess del if');
     if (localStorage.getItem("authUser")) {
       if (process.env.REACT_APP_DEFAULTAUTH === "firebase") {
+        console.log('dentro del login if');
         const obj = JSON.parse(localStorage.getItem("authUser"))
         setusername(obj.displayName)
       } else if (

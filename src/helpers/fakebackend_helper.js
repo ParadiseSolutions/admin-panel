@@ -18,7 +18,7 @@ const isUserAuthenticated = () => {
 const postFakeRegister = (data) => post(url.POST_FAKE_REGISTER, data);
 
 // Login Method
-const postFakeLogin = (data) => post(url.POST_FAKE_LOGIN, data);
+const postLogin = (data) => post(url.POST_LOGIN, data);
 
 // postForgetPwd
 const postFakeForgetPwd = (data) => post(url.POST_FAKE_PASSWORD_FORGET, data);
@@ -205,7 +205,7 @@ export {
   getLoggedInUser,
   isUserAuthenticated,
   postFakeRegister,
-  postFakeLogin,
+  postLogin,
   postFakeProfile,
   postFakeForgetPwd,
   postJwtRegister,

@@ -146,7 +146,7 @@ const Header = props => {
             </div>
           </div>
 
-          <LanguageDropdown />
+          {/* <LanguageDropdown /> */}
 
           <Dropdown
             className="d-none d-lg-inline-block ms-1"
@@ -234,8 +234,12 @@ const Header = props => {
               className="btn header-item noti-icon right-bar-toggle waves-effect"
             >
               <i className="uil-cog"></i>
+            
+            
             </button>
           </div>
+
+          
         </div>
       </div>
     </React.Fragment>

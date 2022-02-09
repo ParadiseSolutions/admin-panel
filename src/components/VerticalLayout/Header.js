@@ -2,7 +2,8 @@ import PropTypes from 'prop-types';
 import React, { useState } from "react";
 
 import { connect } from "react-redux";
-import { Form, Input, Button, Row, Col } from "reactstrap";
+import { Input, Button, Row, Col } from "reactstrap";
+import { Formik, Form} from 'formik';
 
 import { Link } from "react-router-dom";
 
@@ -10,21 +11,12 @@ import { Link } from "react-router-dom";
 import { Dropdown, DropdownToggle, DropdownMenu } from "reactstrap";
 
 // Import menuDropdown
-import LanguageDropdown from "../CommonForBoth/TopbarDropdown/LanguageDropdown";
-import NotificationDropdown from "../CommonForBoth/TopbarDropdown/NotificationDropdown";
+
 import ProfileMenu from "../CommonForBoth/TopbarDropdown/ProfileMenu";
 
 import logoSm from "../../assets/images/logo-sm.png";
 import logoDark from "../../assets/images/logo-dark.png";
 import logoLight from "../../assets/images/logo-light.png";
-
-// import images
-import github from "../../assets/images/brands/github.png";
-import bitbucket from "../../assets/images/brands/bitbucket.png";
-import dribbble from "../../assets/images/brands/dribbble.png";
-import dropbox from "../../assets/images/brands/dropbox.png";
-import mail_chimp from "../../assets/images/brands/mail_chimp.png";
-import slack from "../../assets/images/brands/slack.png";
 
 //i18n
 import { withTranslation } from "react-i18next";
@@ -40,42 +32,48 @@ const Header = props => {
   const [search, setsearch] = useState(false);
   const [socialDrp, setsocialDrp] = useState(false);
 
-  function toggleFullscreen() {
-    if (
-      !document.fullscreenElement &&
-      /* alternative standard method */ !document.mozFullScreenElement &&
-      !document.webkitFullscreenElement
-    ) {
-      // current working methods
-      if (document.documentElement.requestFullscreen) {
-        document.documentElement.requestFullscreen();
-      } else if (document.documentElement.mozRequestFullScreen) {
-        document.documentElement.mozRequestFullScreen();
-      } else if (document.documentElement.webkitRequestFullscreen) {
-        document.documentElement.webkitRequestFullscreen(
-          Element.ALLOW_KEYBOARD_INPUT
-        );
-      }
-    } else {
-      if (document.cancelFullScreen) {
-        document.cancelFullScreen();
-      } else if (document.mozCancelFullScreen) {
-        document.mozCancelFullScreen();
-      } else if (document.webkitCancelFullScreen) {
-        document.webkitCancelFullScreen();
-      }
-    }
-  }
+  // function toggleFullscreen() {
+  //   if (
+  //     !document.fullscreenElement &&
+  //     /* alternative standard method */ !document.mozFullScreenElement &&
+  //     !document.webkitFullscreenElement
+  //   ) {
+  //     // current working methods
+  //     if (document.documentElement.requestFullscreen) {
+  //       document.documentElement.requestFullscreen();
+  //     } else if (document.documentElement.mozRequestFullScreen) {
+  //       document.documentElement.mozRequestFullScreen();
+  //     } else if (document.documentElement.webkitRequestFullscreen) {
+  //       document.documentElement.webkitRequestFullscreen(
+  //         Element.ALLOW_KEYBOARD_INPUT
+  //       );
+  //     }
+  //   } else {
+  //     if (document.cancelFullScreen) {
+  //       document.cancelFullScreen();
+  //     } else if (document.mozCancelFullScreen) {
+  //       document.mozCancelFullScreen();
+  //     } else if (document.webkitCancelFullScreen) {
+  //       document.webkitCancelFullScreen();
+  //     }
+  //   }
+  // }
 
   function tToggle() {
     var body = document.body;
     body.classList.toggle("vertical-collpsed");
     body.classList.toggle("sidebar-enable");
   }
+
+//submit del search
+const onSubmitSearch = (values) =>{
+  
+  console.log(values);
+}
   return (
     <React.Fragment>
       <header id="page-topbar">
-        <div className="navbar-header">
+        <div className="navbar-header" style={{backgroundColor: '#3DC7F4'}} >
           <div className="d-flex">
             <div className="navbar-brand-box">
               <Link to="/" className="logo logo-dark">
@@ -108,21 +106,62 @@ const Header = props => {
               <i className="fa fa-fw fa-bars" />
             </button>
 
-            <Form className="app-search d-none d-lg-block">
+            {/* <Form onSubmit={(e) => onSubmitSearch(e)} className="app-search d-none d-lg-block">
               <div className="position-relative">
-                <input
+                <Input
                   type="text"
                   className="form-control"
                   placeholder={props.t("Search") + "..."}
+
                 />
                 <span className="uil-search"></span>
               </div>
-            </Form>
+            </Form> */}
+
+            <Formik
+       initialValues={{ searchBox: '' }}
+      //  validate={values => {
+      //    const errors = {};
+      //    if (!values.email) {
+      //      errors.email = 'Required';
+      //    } else if (
+      //      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
+      //    ) {
+      //      errors.email = 'Invalid email address';
+      //    }
+      //    return errors;
+      //  }}
+       onSubmit={(values, { setSubmitting }) => {
+        onSubmitSearch(values)
+       }}
+     >
+       {({ isSubmitting, handleSubmit, values, handleBlur, handleChange }) => (
+         <Form onSubmit={handleSubmit} className="app-search d-none d-lg-block">
+           <div className="position-relative">
+                <Input
+                  type="text"
+                  className="form-control"
+                  placeholder={props.t("Search") + "..."}
+                  name='searchBox'
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.searchBox}
+                />
+               
+
+                <span className="uil-search"></span>
+                
+              </div>
+          
+         </Form>
+       )}
+     </Formik>
+
           </div>
 
           <div className="d-flex">
 
-            <Dropdown
+            {/* <Dropdown
               className="d-inline-block d-lg-none ms-2"
               onClick={() => {
                 setsearch(!search);
@@ -147,11 +186,11 @@ const Header = props => {
                   </div>
                 </Form>
               </DropdownMenu>
-            </Dropdown>
+            </Dropdown> */}
 
-            <LanguageDropdown />
+            {/* <LanguageDropdown /> */}
 
-            <Dropdown
+            {/* <Dropdown
               className="d-none d-lg-inline-block ms-1"
               isOpen={socialDrp}
               toggle={() => {
@@ -209,9 +248,9 @@ const Header = props => {
                   </Row>
                 </div>
               </DropdownMenu>
-            </Dropdown>
+            </Dropdown> */}
 
-            <Dropdown className="d-none d-lg-inline-block ms-1">
+            {/* <Dropdown className="d-none d-lg-inline-block ms-1">
               <button
                 type="button"
                 onClick={() => {
@@ -222,20 +261,19 @@ const Header = props => {
               >
                 <i className="uil-minus-path"></i>
               </button>
-            </Dropdown>
+            </Dropdown> */}
 
-            <NotificationDropdown />
+            {/* <NotificationDropdown /> */}
 
             <ProfileMenu />
-
-            <div onClick={() => {
+            {/* <div onClick={() => {
               props.showRightSidebarAction(!props.showRightSidebar);
             }}
               className="dropdown d-inline-block">
               <button type="button" className="btn header-item noti-icon right-bar-toggle waves-effect">
                 <i className="uil-cog"></i>
               </button>
-            </div>
+            </div> */}
 
           </div>
         </div>

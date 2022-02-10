@@ -94,7 +94,7 @@
             a {
                 display: block;
                 padding: .6rem 1.1rem;
-                color: $sidebar-menu-item-color;
+                color: white;
                 position: relative;
                 font-size: 15px;
                 font-weight: 500;
@@ -109,7 +109,7 @@
                     font-size: 1.05rem;
                     line-height: 1.40625rem;
                     vertical-align: middle;
-                    color: $sidebar-menu-item-icon-color;
+                    color: white;
                     transition: all .4s;
                 }
 
@@ -185,14 +185,14 @@
 
    
     .active {
-        color: $sidebar-menu-item-active-color !important;
+        color: #3DC7F4 !important;
 
         i {
-            color: $sidebar-menu-item-active-color !important;
+            color: #3DC7F4 !important;
         }
     }
     > i {
-        color: $sidebar-menu-item-active-color !important;
+        color: #3DC7F4 !important;
     }
 }
 

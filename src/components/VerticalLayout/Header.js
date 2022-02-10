@@ -8,7 +8,7 @@ import { Formik, Form} from 'formik';
 import { Link } from "react-router-dom";
 
 // Reactstrap
-import { Dropdown, DropdownToggle, DropdownMenu } from "reactstrap";
+// import { Dropdown, DropdownToggle, DropdownMenu } from "reactstrap";
 
 // Import menuDropdown
 
@@ -29,8 +29,8 @@ import {
 } from "../../store/actions";
 
 const Header = props => {
-  const [search, setsearch] = useState(false);
-  const [socialDrp, setsocialDrp] = useState(false);
+  // const [search, setsearch] = useState(false);
+  // const [socialDrp, setsocialDrp] = useState(false);
 
   // function toggleFullscreen() {
   //   if (
@@ -118,7 +118,7 @@ const onSubmitSearch = (values) =>{
               </div>
             </Form> */}
 
-            <Formik
+            {/* <Formik
        initialValues={{ searchBox: '' }}
       //  validate={values => {
       //    const errors = {};
@@ -155,7 +155,7 @@ const onSubmitSearch = (values) =>{
           
          </Form>
        )}
-     </Formik>
+     </Formik> */}
 
           </div>
 

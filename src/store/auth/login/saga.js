@@ -1,18 +1,18 @@
 import { call, put, takeEvery, takeLatest } from "redux-saga/effects"
 
 // Login Redux States
-import { LOGIN_USER, LOGOUT_USER, SOCIAL_LOGIN } from "./actionTypes"
+import { LOGIN_USER, LOGIN_INFO, LOGOUT_USER, SOCIAL_LOGIN } from "./actionTypes"
 import { apiError, loginSuccess, logoutUserSuccess } from "./actions"
 
 //Include Both Helper File with needed methods
 import { getFirebaseBackend } from "../../../helpers/firebase_helper"
 import {
   postLogin,
-  postJwtLogin,
+  
   postSocialLogin,
 } from "../../../helpers/fakebackend_helper"
 
-const fireBaseBackend = getFirebaseBackend()
+
 
 function* loginUser({ payload: { user, history } }) {
   try {
@@ -22,9 +22,13 @@ function* loginUser({ payload: { user, history } }) {
         password: user.password,
       })
       localStorage.setItem("authUser", JSON.stringify(response))
-      yield put(loginSuccess(response))
+
+      console.log('respuesta logeo',response)
+      
     
-    history.push("/dashboard")
+      const sessionInfo =  JSON.parse(localStorage.getItem("authUser"))
+       yield put(loginSuccess(sessionInfo))
+      history.push("/dashboard")
   } catch (error) {
     yield put(apiError(error))
   }

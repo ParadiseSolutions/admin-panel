@@ -11,7 +11,7 @@ import { showRightSidebarAction, toggleLeftmenu } from "../../store/actions";
 import { Row, Col, Dropdown, DropdownToggle, DropdownMenu } from "reactstrap";
 
 // Import menuDropdown
-import LanguageDropdown from "../CommonForBoth/TopbarDropdown/LanguageDropdown";
+
 import NotificationDropdown from "../CommonForBoth/TopbarDropdown/NotificationDropdown";
 import ProfileMenu from "../CommonForBoth/TopbarDropdown/ProfileMenu";
 
@@ -146,7 +146,7 @@ const Header = props => {
             </div>
           </div>
 
-          <LanguageDropdown />
+          {/* <LanguageDropdown /> */}
 
           <Dropdown
             className="d-none d-lg-inline-block ms-1"
@@ -234,8 +234,12 @@ const Header = props => {
               className="btn header-item noti-icon right-bar-toggle waves-effect"
             >
               <i className="uil-cog"></i>
+            
+            
             </button>
           </div>
+
+          
         </div>
       </div>
     </React.Fragment>

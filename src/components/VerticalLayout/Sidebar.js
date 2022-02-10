@@ -9,7 +9,7 @@ import SidebarContent from "./SidebarContent";
 
 import logoSm from "../../assets/images/logo-sm.png";
 import logoDark from "../../assets/images/logo-dark.png";
-import logoLight from "../../assets/images/logo-light.png";
+import logo from "../../assets/images/js-tour-and-travel.jpg";
 
 const Sidebar = props => {
 
@@ -22,25 +22,25 @@ const Sidebar = props => {
 
   return (
     <React.Fragment>
-      <div className="vertical-menu">
-        <div className="navbar-brand-box">
+      <div className="vertical-menu" style={{backgroundColor: '#3DC7F4'}}>
+        <div className="navbar-brand-box" >
           <Link to="/" className="logo logo-dark">
             <span className="logo-sm">
               <img src={logoSm} alt="" height="22" />
             </span>
             <span className="logo-lg">
-              <img src={logoDark} alt="" height="20" />
+              <img src={logo} alt="" height="60" />
             </span>
           </Link>
 
-          <Link to="/" className="logo logo-light">
+          {/* <Link to="/" className="logo logo-light">
             <span className="logo-sm">
               <img src={logoSm} alt="" height="22" />
             </span>
             <span className="logo-lg">
               <img src={logoLight} alt="" height="20" />
             </span>
-          </Link>
+          </Link> */}
         </div>
         <button
           onClick={() => {

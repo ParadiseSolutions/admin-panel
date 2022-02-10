@@ -125,7 +125,17 @@ import LockScreen from "../pages/AuthenticationInner/auth-lock-screen"
 // Profile
 import UserProfile from "../pages/Authentication/user-profile"
 
+//content
+import UsersIndex from "../pages/PagesContent/Users"
+import DepartmentsIndex from "../pages/PagesContent/Departments"
 const userRoutes = [
+
+  //content
+  { path: "/users", component: UsersIndex },
+  { path: "/departments", component: DepartmentsIndex },
+  
+  
+  
   { path: "/dashboard", component: Dashboard },
   { path: "/calendar", component: Calendar },
   //chat

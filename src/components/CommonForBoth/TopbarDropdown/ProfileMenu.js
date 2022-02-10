@@ -1,49 +1,39 @@
-import React, { useState, useEffect } from "react"
-import PropTypes from 'prop-types'
+import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import {
   Dropdown,
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
-} from "reactstrap"
+} from "reactstrap";
 
 //i18n
-import { withTranslation } from "react-i18next"
+import { withTranslation } from "react-i18next";
 // Redux
-import { connect } from "react-redux"
-import { withRouter, Link } from "react-router-dom"
+import { connect, useSelector } from "react-redux";
+import { withRouter, Link } from "react-router-dom";
 
 // users
-import user4 from "../../../assets/images/users/avatar-4.jpg"
+import user4 from "../../../assets/images/users/avatar-4.jpg";
 
-const ProfileMenu = props => {
+const ProfileMenu = (props) => {
   // Declare a new state variable, which we'll call "menu"
-  const [menu, setMenu] = useState(false)
+  const [menu, setMenu] = useState(false);
 
-  const [username, setusername] = useState("carlitos")
+  const [username, setusername] = useState("");
+
+  
+  const sessionInfo =  JSON.parse(localStorage.getItem("authUser"))
 
   useEffect(() => {
+    if (sessionInfo && sessionInfo.status === 200) {
 
+      setusername(sessionInfo.data.user.first_name)
 
-    console.log('logeon antess del if');
-    if (localStorage.getItem("authUser")) {
-      if (process.env.REACT_APP_DEFAULTAUTH === "firebase") {
-        console.log('dentro del login if');
-        const obj = JSON.parse(localStorage.getItem("authUser"))
-        setusername(obj.displayName)
-      } else if (
-        process.env.REACT_APP_DEFAULTAUTH === "fake" ||
-        process.env.REACT_APP_DEFAULTAUTH === "jwt"
-      ) {
-        const obj = JSON.parse(localStorage.getItem("authUser"))
-        if(obj.username){
-          setusername(obj.username)
-        }else{
-          setusername(obj.name)
-        }
-      }
+    } else {
+      setusername("Guest");
     }
-  }, [props.success])
+  }, [props.success, sessionInfo]);
 
   return (
     <React.Fragment>
@@ -62,7 +52,9 @@ const ProfileMenu = props => {
             src={user4}
             alt="Header Avatar"
           />
-          <span className="d-none d-xl-inline-block ms-1 fw-medium font-size-15">{username}</span>{" "}
+          <span className="d-none d-xl-inline-block mx-2 fw-medium font-size-20 text-white">
+            {username}
+          </span>{" "}
           <i className="uil-angle-down d-none d-xl-inline-block font-size-15"></i>
         </DropdownToggle>
         <DropdownMenu className="dropdown-menu-end">
@@ -78,7 +70,9 @@ const ProfileMenu = props => {
           <DropdownItem tag="a" href="#">
             <i className="uil uil-cog font-size-18 align-middle me-1 text-muted"></i>
             {props.t("Settings")}
-            <span className="badge bg-soft-success rounded-pill mt-1 ms-2">03</span>
+            <span className="badge bg-soft-success rounded-pill mt-1 ms-2">
+              03
+            </span>
           </DropdownItem>
           <DropdownItem tag="a" href="auth-lock-screen">
             <i className="uil uil-lock-alt font-size-18 align-middle me-1 text-muted"></i>
@@ -92,19 +86,19 @@ const ProfileMenu = props => {
         </DropdownMenu>
       </Dropdown>
     </React.Fragment>
-  )
-}
+  );
+};
 
 ProfileMenu.propTypes = {
   success: PropTypes.any,
-  t: PropTypes.any
-}
+  t: PropTypes.any,
+};
 
-const mapStatetoProps = state => {
-  const { error, success } = state.Profile
-  return { error, success }
-}
+const mapStatetoProps = (state) => {
+  const { error, success } = state.Profile;
+  return { error, success };
+};
 
 export default withRouter(
   connect(mapStatetoProps, {})(withTranslation()(ProfileMenu))
-)
+);
